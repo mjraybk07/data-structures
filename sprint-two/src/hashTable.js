@@ -16,7 +16,7 @@ HashTable.prototype.insert = function(k, v) {
 
   } else {
 
-    // loop through the bucket
+    // loop through the bucket to check if key is already present
     for (var i = 0; i < bucket.length; i++) {
       var tuple = bucket[i];
 
@@ -27,7 +27,11 @@ HashTable.prototype.insert = function(k, v) {
       }
     }
 
+    // if key is not found, add new tuple to bucket
+    bucket.push([k, v]);
+    this._storage.set(index, bucket);
   }
+
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -49,12 +53,35 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  var bucket = this._storage.get(index);
+
+  if ( bucket === undefined ) {
+    return undefined;
+
+  } else {
+
+    // loop thought bucket
+    for ( var i = 0; i < bucket.length; i++ ) {
+      var tuple = bucket[i];
+
+      //  if tuple key matches target delete tuple
+      if ( tuple[0] === k ) {
+        bucket.splice(i, 1);
+        return tuple;
+      }
+    }
+
+  }
+
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert  O(1) Constant Time
+ retrieve O(1) Constant Time
+ remove O(1) Constant Time
  */
 
 
