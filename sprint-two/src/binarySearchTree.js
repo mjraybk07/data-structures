@@ -93,7 +93,30 @@ BinarySearchTree.prototype.contains = function (value) {
 // o - none
 // se - executes cb on every value in the tree
 
+/*
+execute cb on this tree value
+
+  if root node has a left tree
+    recursively call depthFirstLog on the left tree w/ cb arg
+
+  if root node has a right tree
+      recursively call depthFirstLog on the right tree w/ cb arg
+*/
+
 BinarySearchTree.prototype.depthFirstLog = function (cb) {
+  // execute callback on tree value
+  cb(this.value);
+
+  // look left
+  if ( this.left !== null ) {
+    this.left.depthFirstLog(cb);
+  }
+
+  // look right
+  if ( this.right !== null ) {
+    this.right.depthFirstLog(cb);
+  }
+
 };
 
 
