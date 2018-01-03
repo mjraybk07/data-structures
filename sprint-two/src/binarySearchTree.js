@@ -124,11 +124,10 @@ BinarySearchTree.prototype.depthFirstLog = function (cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+
+insert - O(log n) Logarithmic Time
+contains - O(log n) Logarithmic Time
+depthFirstLog - O(C^n) Exponential
+
  */
 
-
-// -- tests --
-// var test = new BinarySearchTree(4);
-
-
-// console.log(typeof test.contains);
